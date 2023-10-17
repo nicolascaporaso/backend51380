@@ -1,0 +1,131 @@
+<button id="btnToggle">Cargar producto nuevo</button>
+
+<div style="text-align: center;">
+  {{#each payload}}
+  <div id={{this._id}} style="display: inline-block; margin: 10px; border: 5px solid black;">
+    <img src="{{this.thumbnails}}" alt="product image" width="200" height="200">
+    <h2>{{this.title}}</h2>
+    <p>{{this.description}}</p>
+    <p>Precio: {{this.price}}</p>
+    <p>Stock: {{this.stock}}</p>
+
+    <button onclick="deleteProduct('{{this._id}}')">Eliminar</button>
+    <button onclick="addToCart('{{this._id}}')">AddtoCart</button>
+  </div>
+
+  {{/each}}
+</div>
+
+<div class="pagination">
+  <div><label for=""></label>Products for Pages {{pagination.limit}}</div>
+  <div><label for=""></label>Total Products {{pagination.totalDocs}}</div>
+  <div><label for=""></label>Total Pages {{pagination.totalPages}}</div>
+  <div><label for=""></label>Actual Page {{pagination.page}}</div>
+
+  {{#if pagination.hasPrevPage}}
+  <a href="/products?page={{pagination.prevPage}}">
+    <div><label for=""></label>PreviousPage {{pagination.prevPage}}</div>
+  </a>
+  {{/if}}
+
+  {{#if pagination.hasNextPage}}
+  <a href="/products?page={{pagination.nextPage}}">
+    <div><label for=""></label>NextPage {{pagination.nextPage}}</div>
+  </a>
+  {{/if}}
+</div>
+
+<div id="addNewProduct" class="hidden">
+  {{> form}}
+</div>
+
+<script>
+
+  const btnToggle = document.getElementById('btnToggle');
+  const contentContainer = document.getElementById('addNewProduct');
+
+  btnToggle.addEventListener('click', () => {
+    contentContainer.classList.toggle('hidden');
+  });
+
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    getCartSession();
+  });
+
+  async function getCartSession() {
+    try {
+      const response = await fetch('/api/carts/cartid/id', { method: 'get' });
+      if (response.ok) {
+        const data = await response.json();
+        const cartId = data.cartId;
+        localStorage.setItem('cartId', cartId);
+      } else {
+        alert("no se pudo obtener su carrito, intente volver a iniciar sesion")
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  async function deleteProduct(productId) {
+  Swal.fire({
+    title: "¿Estás seguro?",
+    text: "Esta acción eliminará el producto",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Sí, eliminar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(`/api/products/${productId}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (response.ok) {
+            Swal.fire("Producto eliminado", "", "success");
+            const element = document.getElementById(productId);
+            if (element) {
+              element.remove();
+            }
+          } else {
+            Swal.fire("Error al eliminar el producto", "Verifique sus permisos", "error");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          Swal.fire("Error de solicitud", "", "error");
+        });
+    }
+  });
+}
+
+  function addToCart(pid) {
+    Swal.fire({
+    title: "Agregando a carrito",
+    onBeforeOpen: () => {
+      Swal.showLoading();
+    },
+  });
+    const cid = localStorage.getItem('cartId');
+
+    fetch(`/api/carts/${cid}/product/${pid}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        quantity: 1
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        if (response.ok) {
+          Swal.fire("¡Agregado al carrito satisfactoriamente!", "", "success");
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+
+</script>

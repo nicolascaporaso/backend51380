@@ -1,0 +1,50 @@
+{
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.0.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "express-session": "^1.17.3",
+    "fetch": "^1.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.2.1",
+    "mongoose-paginate": "^5.0.3",
+    "mongoose-paginate-v2": "^1.7.1",
+    "multer": "^1.4.5-lts.1",
+    "node": "^20.1.0",
+    "node-fetch": "^3.3.1",
+    "nodemailer": "^6.9.4",
+    "nodemon": "^2.0.22",
+    "passport": "^0.6.0",
+    "passport-facebook": "^3.0.0",
+    "passport-github2": "^0.1.12",
+    "passport-local": "^1.0.0",
+    "socket.io": "^4.6.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "winston": "^3.8.2"
+  },
+  "name": "entregable-2-archivos",
+  "version": "1.0.0",
+  "main": "./src/server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "supertest": "mocha --timeout 4600 ./src/test/supertest.test.js",
+    "start": "set NODE_ENV=production && nodemon -e yaml,js ./src/server.js",
+    "dev": "set NODE_ENV=development && nodemon -e yaml,js ./src/server.js",
+    "qa": "set NODE_ENV=test && nodemon -e yaml,js ./src/server.js"
+  },
+  "description": "",
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
+  }
+}
