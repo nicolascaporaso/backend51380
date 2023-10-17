@@ -6,8 +6,8 @@ export async function sendEmailsToDeletedProducts(data, id) {
         service: 'gmail',
         secure: false, 
         auth: {
-            user: 'gorjosocial@gmail.com',
-            pass: 'zsoqacogrbstqqwp',
+            user: GMAIL_CLIENT_USER,
+            pass: GMAIL_CLIENT_PASS,
         },
         tls: {
             rejectUnauthorized: false
@@ -16,7 +16,7 @@ export async function sendEmailsToDeletedProducts(data, id) {
     });
 
     const mailOptions = {
-        from: "gorjosocial@gmail.com",
+        from: GMAIL_CLIENT_USER,
         to: data,
         subject: 'Aviso de eliminación de producto',
         text: `se ha eliminado el producto ${id}`
@@ -40,8 +40,8 @@ export async function sendEmailsToDeletedUsers(deletedUsers) {
         service: 'gmail',
         secure: false, 
         auth: {
-            user: 'gorjosocial@gmail.com',
-            pass: 'zsoqacogrbstqqwp',
+            user: GMAIL_CLIENT_USER,
+            pass: GMAIL_CLIENT_PASS,
         },
         tls: {
             rejectUnauthorized: false
@@ -51,7 +51,7 @@ export async function sendEmailsToDeletedUsers(deletedUsers) {
 
 for (const user of deletedUsers) {
     const mailOptions = {
-        from: "gorjosocial@gmail.com",
+        from: GMAIL_CLIENT_USER,
         to: user.email,
         subject: 'Aviso de eliminación de cuenta',
         text: 'Tu cuenta ha sido eliminada. Si tienes alguna pregunta, por favor contáctanos.',
