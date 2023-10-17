@@ -109,7 +109,7 @@ export function iniPassport() {
             {
                 clientID: GITHUB_CLIENT_ID,
                 clientSecret: GITHUB_CLIENT_SECRET,
-                callbackURL: 'http://127.0.0.1:8081/auth/github/callback',
+                callbackURL: 'https://nicolascaporaso-backend-51380.onrender.com/auth/github/callback',
             },
             async (accesToken, _, profile, done) => {
                 try {
