@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const newRole = select.value;
 
             // Envía una solicitud Fetch para actualizar el rol
-            fetch(`http://127.0.0.1:8081/api/users/role/${userId}?newRole=${newRole}`, {
+            fetch(`/api/users/role/${userId}?newRole=${newRole}`, {
                 method: 'PUT', 
             })
             .then(response => {

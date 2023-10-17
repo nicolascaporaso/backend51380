@@ -32,7 +32,7 @@ const MONGO_PASS = config.MONGO_PASS;
 const DB_NAME = config.DB_NAME;
 
 const httpServer = app.listen(port, () => {
-    logger.info("Server listen port " + "http://localhost:" + port + "/")
+    logger.info("Server listen on " + "https://nicolascaporaso-backend-51380.onrender.com/");
 });
 
 // Conexión a mongo 

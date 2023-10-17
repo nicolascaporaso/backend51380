@@ -28,7 +28,7 @@ class ResetPasswordController {
             const token = jwt.sign({ userId: user._id }, 'tu-secreto', { expiresIn: '1h' });
 
             // Envía un correo electrónico con el enlace de restablecimiento
-            const resetLink = `http://127.0.0.1:8081/auth/recovery/reset-password/${token}`;
+            const resetLink = `https://nicolascaporaso-backend-51380.onrender.com/auth/recovery/reset-password/${token}`;
             const mailOptions = {
                 from: 'gorjosocial@gmail.com',
                 to: user.email,
