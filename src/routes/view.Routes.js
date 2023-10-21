@@ -11,7 +11,7 @@ viewRouter.get("/realtimeproducts",isLoggedin, viewsController.viewRealTime);
 
 viewRouter.get("/products", isLoggedin, viewsController.getAllProducts);
 
-viewRouter.get("/cart/:cid", isUserCartOwner, viewsController.getCartById);
+viewRouter.get("/cart/:cid", isLoggedin, viewsController.getCartById);
 
 viewRouter.get("/mockingproducts",isAdmin, mockingController.get);
 
