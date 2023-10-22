@@ -7,7 +7,7 @@ export const cartRouter = Router()
 
 cartRouter.post("/",isLoggedin, cartsController.createCart);
 
-cartRouter.get("/:cid", isUserCartOwner, cartsController.getById);
+cartRouter.get("/:cid", isLoggedin, cartsController.getById);
 
 cartRouter.get("/:cid/purchase", isUserCartOwner, ticketController.purchase);
 

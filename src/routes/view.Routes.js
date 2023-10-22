@@ -17,4 +17,4 @@ viewRouter.get("/mockingproducts",isAdmin, mockingController.get);
 
 viewRouter.get("/users", isAdmin, viewsController.getAllUsers);
 
-viewRouter.get("/ticket/:cid",isUserCartOwner , viewsController.Ticket);
+viewRouter.get("/ticket/:cid",isLoggedin , viewsController.Ticket);
