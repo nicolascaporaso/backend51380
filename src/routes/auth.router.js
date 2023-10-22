@@ -24,7 +24,7 @@ authRouter.post('/login', passport.authenticate('login', { failureRedirect: '/au
 
 authRouter.get('/logout', isLoggedin , sessionController.logout);
 
-authRouter.get("/profile", isLoggedin, sessionController.profile);
+authRouter.get("/profile", sessionController.profile);
 
 //--------------------------------github -----------------------------------
 
